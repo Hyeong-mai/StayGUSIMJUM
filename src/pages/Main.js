@@ -104,7 +104,7 @@ const SliderContainer = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  height: 600px;
+  height: 650px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
   touch-action: manipulation;
   user-select: none;
@@ -221,6 +221,7 @@ const TextBox = styled.div`
     line-height: 1.6;
     opacity: 0.9;
     margin-bottom: 1.5rem;
+    white-space: pre-line;
   }
 
   .tag {
@@ -375,7 +376,7 @@ const slideData = [
     secondImage: "/image/space/optimized/outside1.jpg",
     title: "경기 양평, 고요함이 깃든 공간",
     description:
-      "경기 양평, 고요함이 깃든 작은 마을에서는\n도심에서 들리지 않던 소리들이 더욱 선명해집니다.\n\n나뭇잎이 부딪히는 소리, 창가를 스치는 바람 소리,그리고 새소리까지.자연이 조용히 공간을 채우면,머무는 이의 마음도 차분히 가라앉습니다.",
+      "경기 양평, 고요함이 깃든 작은 마을에서는 도심에서 들리지 않던 소리들이 더욱 선명해집니다.\n\n나뭇잎이 부딪히는 소리, 창가를 스치는 바람 소리,그리고 새소리까지.자연이 조용히 공간을 채우면,머무는 이의 마음도 차분히 가라앉습니다.",
     tags: ["양평", "자연", "고요함"],
     quote:
       "자연이 조용히 공간을 채우면, 머무는 이의 마음도 차분히 가라앉습니다",
@@ -549,6 +550,7 @@ const Main = ({ children }) => {
                     {/* 텍스트 박스 */}
                     <TextBox>
                       <h2>{slide.title}</h2>
+                      <br />
                       <p>{slide.description}</p>
                       {/* <div>
                         {slide.tags.map((tag, tagIndex) => (
