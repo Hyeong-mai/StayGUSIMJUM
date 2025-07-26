@@ -106,13 +106,13 @@ const SliderContainer = styled.div`
   margin: 0 auto;
   height: 600px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-  touch-action: pan-x;
+  touch-action: manipulation;
   user-select: none;
 
   @media (max-width: 768px) {
     height: auto;
     min-height: 500px;
-    touch-action: pan-x;
+    touch-action: manipulation;
   }
 
   @media (max-width: 480px) {
@@ -422,13 +422,19 @@ const Main = ({ children }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
+  const [touchStartY, setTouchStartY] = useState(null);
+  const [touchEndY, setTouchEndY] = useState(null);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slideData.length);
+    if (currentSlide < slideData.length - 1) {
+      setCurrentSlide((prev) => prev + 1);
+    }
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slideData.length) % slideData.length);
+    if (currentSlide > 0) {
+      setCurrentSlide((prev) => prev - 1);
+    }
   };
 
   const goToSlide = (index) => {
@@ -438,30 +444,45 @@ const Main = ({ children }) => {
   // 터치 이벤트 핸들러
   const handleTouchStart = (e) => {
     setTouchEnd(null);
+    setTouchEndY(null);
     setTouchStart(e.targetTouches[0].clientX);
+    setTouchStartY(e.targetTouches[0].clientY);
   };
 
   const handleTouchMove = (e) => {
     setTouchEnd(e.targetTouches[0].clientX);
+    setTouchEndY(e.targetTouches[0].clientY);
   };
 
   const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
+    if (!touchStart || !touchEnd || !touchStartY || !touchEndY) return;
 
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
+    const distanceX = touchStart - touchEnd;
+    const distanceY = touchStartY - touchEndY;
+    const isLeftSwipe = distanceX > 50;
+    const isRightSwipe = distanceX < -50;
 
-    if (isLeftSwipe) {
+    // 세로 스크롤이 가로 스와이프보다 큰 경우 스와이프 무시
+    if (Math.abs(distanceY) > Math.abs(distanceX)) {
+      setTouchStart(null);
+      setTouchEnd(null);
+      setTouchStartY(null);
+      setTouchEndY(null);
+      return;
+    }
+
+    if (isLeftSwipe && currentSlide < slideData.length - 1) {
       nextSlide();
     }
-    if (isRightSwipe) {
+    if (isRightSwipe && currentSlide > 0) {
       prevSlide();
     }
 
     // 터치 상태 초기화
     setTouchStart(null);
     setTouchEnd(null);
+    setTouchStartY(null);
+    setTouchEndY(null);
   };
 
   React.useEffect(() => {
