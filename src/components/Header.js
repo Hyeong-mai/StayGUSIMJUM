@@ -12,8 +12,12 @@ const HeaderWrapper = styled.header`
   right: 0;
   z-index: 100;
 
+  @media (max-width: 768px) {
+    height: 65px;
+  }
+
   @media (max-width: 480px) {
-    height: 70px; /* 모바일에서 헤더 높이 증가 */
+    height: 70px;
   }
 `;
 
@@ -21,7 +25,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -75,9 +79,9 @@ const Logo = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
-  margin-left: 10px;
+
   img {
-    height: 30px;
+    height: 35px;
     width: auto;
     transition: opacity 0.2s;
   }
@@ -88,13 +92,13 @@ const Logo = styled.div`
 
   @media (max-width: 768px) {
     img {
-      height: 26px;
+      height: 30px;
     }
   }
 
   @media (max-width: 480px) {
     img {
-      height: 24px;
+      height: 26px;
     }
   }
 `;
@@ -102,10 +106,14 @@ const Logo = styled.div`
 const RightSection = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
+
+  @media (max-width: 768px) {
+    gap: 0.6rem;
+  }
 
   @media (max-width: 480px) {
-    gap: 0.3rem;
+    gap: 0.4rem;
   }
 `;
 

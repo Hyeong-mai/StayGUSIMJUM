@@ -9,6 +9,16 @@ const MainWrapper = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    height: auto;
+    min-height: 100vh;
+    padding: 120px 0px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 120px 0px;
+  }
 `;
 
 const SlideContainerWrapper = styled.div`
@@ -21,8 +31,17 @@ const MainContent = styled.div`
   margin: 0 auto;
   width: 100%;
 
+  @media (max-width: 1200px) {
+    max-width: 100%;
+    padding: 0 2rem;
+  }
+
   @media (max-width: 768px) {
     padding: 0 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 0.5rem;
   }
 `;
 
@@ -33,24 +52,53 @@ const HeroSection = styled.section`
 `;
 
 const Title = styled.h1`
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: bold;
   color: #333;
   margin-bottom: 1rem;
 
+  @media (max-width: 1200px) {
+    font-size: 3rem;
+  }
+
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 2.2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1.5rem;
   }
 `;
 
 const Subtitle = styled.p`
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: #666;
   margin-bottom: 3rem;
   line-height: 1.6;
 
+  @media (max-width: 1200px) {
+    font-size: 1.2rem;
+  }
+
   @media (max-width: 768px) {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 480px) {
     font-size: 1rem;
+    margin-bottom: 1.5rem;
+    br {
+      display: none;
+    }
+  }
+
+  @media (max-width: 320px) {
+    font-size: 0.9rem;
   }
 `;
 
@@ -61,6 +109,17 @@ const SliderContainer = styled.div`
   margin: 0 auto;
   height: 600px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    height: auto;
+    max-height: 600px;
+  }
+
+  @media (max-width: 480px) {
+    height: auto;
+    min-height: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const SliderWrapper = styled.div`
@@ -96,6 +155,16 @@ const Slide = styled.div`
   &:nth-child(4) {
     background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
   }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    min-height: 500px;
+  }
+
+  @media (max-width: 480px) {
+    min-height: 400px;
+  }
 `;
 
 const ImageBox = styled.div`
@@ -114,6 +183,15 @@ const ImageBox = styled.div`
 
   &:hover img {
     transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    flex: 1;
+    min-height: 200px;
+  }
+
+  @media (max-width: 480px) {
+    min-height: 150px;
   }
 `;
 
@@ -148,6 +226,33 @@ const TextBox = styled.div`
     font-size: 0.9rem;
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+    flex: 1;
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
   }
 `;
 
@@ -215,6 +320,20 @@ const ArrowButton = styled.button`
     opacity: 0.3;
     cursor: not-allowed;
     transform: translateY(-50%);
+  }
+
+  @media (max-width: 768px) {
+    width: 60px;
+    height: 60px;
+    font-size: 1.3rem;
+    ${(props) => (props.direction === "left" ? "left: 15px;" : "right: 15px;")}
+  }
+
+  @media (max-width: 480px) {
+    width: 50px;
+    height: 50px;
+    font-size: 1.1rem;
+    ${(props) => (props.direction === "left" ? "left: 10px;" : "right: 10px;")}
   }
 `;
 
@@ -295,6 +414,7 @@ const slideData = [
 
 const Main = ({ children }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slideData.length);
@@ -307,6 +427,17 @@ const Main = ({ children }) => {
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
+
+  React.useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   return (
     <MainWrapper>
@@ -350,7 +481,11 @@ const Main = ({ children }) => {
                 {slideData.map((slide) => (
                   <Slide key={slide.id}>
                     {/* 큰 이미지 영역 */}
-                    <ImageBox style={{ gridRow: "1 / 3" }}>
+                    <ImageBox
+                      style={{
+                        gridRow: isMobile ? "auto" : "1 / 3",
+                      }}
+                    >
                       <img src={slide.mainImage} alt={slide.title} />
                     </ImageBox>
 
@@ -368,12 +503,14 @@ const Main = ({ children }) => {
                     </TextBox>
 
                     {/* 작은 이미지 영역 */}
-                    <ImageBox>
-                      <img
-                        src={slide.secondImage}
-                        alt={`${slide.title} 보조`}
-                      />
-                    </ImageBox>
+                    {!isMobile && (
+                      <ImageBox>
+                        <img
+                          src={slide.secondImage}
+                          alt={`${slide.title} 보조`}
+                        />
+                      </ImageBox>
+                    )}
                   </Slide>
                 ))}
               </SlidesContainer>

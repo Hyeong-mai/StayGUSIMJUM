@@ -7,6 +7,14 @@ const FeaturesWrapper = styled.main`
   padding-top: 60px;
   background-color: #2c7a8c;
   min-height: 100vh;
+
+  @media (max-width: 768px) {
+    padding-top: 65px;
+  }
+
+  @media (max-width: 480px) {
+    padding-top: 70px;
+  }
 `;
 
 const FeaturesContent = styled.div`
@@ -16,21 +24,33 @@ const FeaturesContent = styled.div`
   @media (max-width: 768px) {
     padding: 2rem 0;
   }
+
+  @media (max-width: 480px) {
+    padding: 1rem 0;
+  }
 `;
 
 const HeroSection = styled.section`
   text-align: center;
   margin-bottom: 5rem;
-  padding: 2rem 0;
+  padding: 3rem 2rem;
   max-width: 1500px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 2rem;
-  padding-right: 2rem;
+
+  @media (max-width: 1200px) {
+    padding: 2.5rem 2rem;
+    /* margin-bottom: 4rem; */
+  }
 
   @media (max-width: 768px) {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 2rem 1rem;
+    /* margin-bottom: 3rem; */
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem 0.5rem;
+    /* margin-bottom: 2rem; */
   }
 `;
 
@@ -47,16 +67,30 @@ const Title = styled.h1`
 `;
 
 const Subtitle = styled.p`
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   color: white;
-
   line-height: 1.6;
-  /* max-width: 600px; */
   margin-left: auto;
   margin-right: auto;
+  max-width: 800px;
+
+  @media (max-width: 1200px) {
+    font-size: 1.3rem;
+  }
 
   @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 480px) {
     font-size: 1.1rem;
+    br {
+      display: none;
+    }
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1rem;
   }
 `;
 
@@ -70,6 +104,11 @@ const SpaceContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 600px;
+  /* border-radius: 10px;
+  overflow: hidden; */
+  @media (max-width: 1200px) {
+    min-height: 500px;
+  }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -116,9 +155,17 @@ const ImageSection = styled.div`
     opacity: 1;
   } */
 
+  @media (max-width: 1200px) {
+    min-height: 500px;
+  }
+
   @media (max-width: 768px) {
-    min-height: 400px;
+    min-height: 350px;
     background-attachment: scroll;
+  }
+
+  @media (max-width: 480px) {
+    min-height: 280px;
   }
 `;
 
@@ -130,8 +177,20 @@ const ContentSection = styled.div`
   justify-content: center;
   position: relative;
 
+  @media (max-width: 1200px) {
+    padding: 3rem;
+  }
+
   @media (max-width: 768px) {
-    padding: 2rem;
+    padding: 2.5rem 2rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 1rem;
+  }
+
+  @media (max-width: 320px) {
+    padding: 1.5rem 0.8rem;
   }
 `;
 
@@ -380,7 +439,7 @@ const spacesData = [
       "개별 에어컨 및 난방",
       "암막 커튼으로 숙면 보장",
       "개인 수납공간 제공",
-      "독립적인 프라이버시 공간",
+      "독립적인 프라이빗 공간",
     ],
     bgImage: "/image/space/optimized/bedroom1.jpg",
     images: [

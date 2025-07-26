@@ -4,11 +4,18 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   overflow-x: hidden;
   width: 100%;
   height: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 
 #root {
@@ -23,6 +30,82 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* 모바일 터치 개선 */
+@media (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  html {
+    font-size: 15px;
+  }
+}
+
+/* 작은 모바일 화면 대응 */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* 매우 작은 화면 대응 */
+@media (max-width: 320px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+/* 큰 화면 대응 */
+@media (min-width: 1400px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 1800px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+/* 이미지 최적화 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 버튼 및 인터랙티브 요소 접근성 개선 */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* 포커스 개선 */
+*:focus {
+  outline: 2px solid #2c7a8c;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  *:focus {
+    outline-width: 1px;
+  }
 }
 
 .App-logo {
