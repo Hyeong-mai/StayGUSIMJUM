@@ -477,7 +477,7 @@ const ReservationButton = styled.button`
   background: ${(props) =>
     props.disabled
       ? "linear-gradient(45deg, #bdc3c7, #95a5a6)"
-      : "linear-gradient(45deg, #3498db, #9b59b6)"};
+      : "linear-gradient(135deg, #2c7a8c 0%, #1e5266 100%)"};
   color: white;
   border: none;
   border-radius: 12px;
@@ -543,12 +543,182 @@ const LocationInfo = styled.div`
   }
 `;
 
+// 모달 관련 스타일 컴포넌트들
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+  opacity: ${(props) => (props.isOpen ? 1 : 0)};
+  visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
+  transition: all 0.3s ease;
+`;
+
+const ModalContent = styled.div`
+  background: white;
+  border-radius: 20px;
+  padding: 3rem;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: ${(props) => (props.isOpen ? "scale(1)" : "scale(0.8)")};
+  transition: all 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+    margin: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+    margin: 0.5rem;
+  }
+`;
+
+const ModalHeader = styled.div`
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: #7f8c8d;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 1.5rem;
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+`;
+
+const PlatformGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+`;
+
+const PlatformButton = styled.button`
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  &:hover {
+    border-color: #3498db;
+    background: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .icon {
+    font-size: 2rem;
+    min-width: 50px;
+    text-align: center;
+  }
+
+  .content {
+    flex: 1;
+  }
+
+  .title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.3rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.2rem;
+
+    .icon {
+      font-size: 1.5rem;
+      min-width: 40px;
+    }
+
+    .title {
+      font-size: 1.1rem;
+    }
+
+    .description {
+      font-size: 0.85rem;
+    }
+  }
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #f8f9fa;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #e9ecef;
+    color: #2c3e50;
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 480px) {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+`;
+
 const About = () => {
   const [openSections, setOpenSections] = useState({});
   const [agreements, setAgreements] = useState({
     terms: false,
     privacy: false,
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleSection = (section) => {
     setOpenSections((prev) => ({
@@ -568,13 +738,51 @@ const About = () => {
 
   const handleReservation = () => {
     if (allAgreed) {
-      alert("예약 페이지로 이동합니다!");
-      // 여기에 예약 페이지 이동 로직 추가
+      setIsModalOpen(true);
     }
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handlePlatformSelect = (platform) => {
+    let url = "";
+
+    switch (platform) {
+      case "airbnb":
+        url = "https://www.airbnb.co.kr/";
+        break;
+      case "naver":
+        url = "https://www.naver.com/";
+        break;
+      case "stayfolio":
+        url = "https://www.stayfolio.com/";
+        break;
+      default:
+        return;
+    }
+
+    window.open(url, "_blank");
+    setIsModalOpen(false);
+  };
+
+  // ESC 키로 모달 닫기
+  React.useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === "Escape" && isModalOpen) {
+        closeModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [isModalOpen]);
+
   return (
-    <AboutWrapper>
+    <AboutWrapper id="about">
       <AboutContent>
         <HeroSection>
           <Title>꼭! 확인해주세요.</Title>
@@ -701,6 +909,50 @@ const About = () => {
           </LocationInfo>
         </ContentSection> */}
       </AboutContent>
+
+      {isModalOpen && (
+        <ModalOverlay isOpen={isModalOpen} onClick={closeModal}>
+          <ModalContent
+            isOpen={isModalOpen}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <CloseButton onClick={closeModal}>×</CloseButton>
+            <ModalHeader>
+              <h3>예약 플랫폼 선택</h3>
+              <p>원하시는 예약 플랫폼을 선택해주세요.</p>
+            </ModalHeader>
+            <PlatformGrid>
+              <PlatformButton onClick={() => handlePlatformSelect("airbnb")}>
+                <div className="icon">🏠</div>
+                <div className="content">
+                  <div className="title">Airbnb</div>
+                  <div className="description">
+                    다양한 숙소 및 경험을 제공하는 세계적인 예약 플랫폼
+                  </div>
+                </div>
+              </PlatformButton>
+              <PlatformButton onClick={() => handlePlatformSelect("naver")}>
+                <div className="icon">🟢</div>
+                <div className="content">
+                  <div className="title">Naver</div>
+                  <div className="description">
+                    네이버 플랫폼을 통한 예약 및 호스팅 서비스
+                  </div>
+                </div>
+              </PlatformButton>
+              <PlatformButton onClick={() => handlePlatformSelect("stayfolio")}>
+                <div className="icon">🏨</div>
+                <div className="content">
+                  <div className="title">Stayfolio</div>
+                  <div className="description">
+                    감성적인 숙소를 선별한 프리미엄 예약 플랫폼
+                  </div>
+                </div>
+              </PlatformButton>
+            </PlatformGrid>
+          </ModalContent>
+        </ModalOverlay>
+      )}
     </AboutWrapper>
   );
 };

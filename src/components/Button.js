@@ -5,11 +5,11 @@ const StyledButton = styled.button`
   background: transparent;
   border: 2px solid #2c7a8c;
   color: #2c7a8c;
-  padding: 0.4rem 1rem;
+  padding: 0.2rem 0.5rem;
   border-radius: 25px;
   cursor: pointer;
   font-family: "Orbit", sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   transition: all 0.3s ease;
   outline: none;
   box-shadow: 0 2px 8px rgba(44, 122, 140, 0.2);
