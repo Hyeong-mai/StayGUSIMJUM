@@ -335,7 +335,7 @@ const ModalContent = styled.div`
   max-width: 90vw;
   max-height: 90vh;
   background: white;
-  padding: 0.2rem;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -343,7 +343,7 @@ const ModalContent = styled.div`
   transition: all 0.3s ease;
 
   @media (max-width: 768px) {
-    padding: 1rem;
+    padding: 0.5rem;
   }
 `;
 
@@ -362,7 +362,7 @@ const ModalTitle = styled.h3`
 
 const CloseButton = styled.button`
   position: absolute;
-  top: -3rem;
+  top: -4rem;
   right: 0rem;
   background: none;
   border: none;

@@ -92,9 +92,6 @@ const Subtitle = styled.p`
   @media (max-width: 480px) {
     font-size: 1rem;
     margin-bottom: 1.5rem;
-    br {
-      display: none;
-    }
   }
 
   @media (max-width: 320px) {
