@@ -132,7 +132,8 @@ const SectionTitle = styled.h2`
     transform: translateX(-50%);
     width: 80px;
     height: 3px;
-    background: linear-gradient(45deg, #3498db, #9b59b6);
+    background: linear-gradient(135deg, #2c7a8c 0%, #1e5266 100%);
+
     border-radius: 2px;
   }
 
@@ -344,7 +345,7 @@ const PriceTable = styled.div`
 `;
 
 const TableHeader = styled.div`
-  background: linear-gradient(45deg, #3498db, #9b59b6);
+  background: linear-gradient(135deg, #2c7a8c 0%, #1e5266 100%);
   color: white;
   padding: 1.5rem;
   display: grid;
