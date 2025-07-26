@@ -5,15 +5,15 @@ const FeaturesWrapper = styled.main`
   width: 100vw;
   overflow-x: hidden;
   padding-top: 60px;
-  background-color: #2c7a8c;
+  background-color: white;
   min-height: 100vh;
 
   @media (max-width: 768px) {
-    padding-top: 65px;
+    /* padding-top: 65px; */
   }
 
   @media (max-width: 480px) {
-    padding-top: 70px;
+    /* padding-top: 70px; */
   }
 `;
 
@@ -22,34 +22,34 @@ const FeaturesContent = styled.div`
   padding: 0rem 0;
 
   @media (max-width: 768px) {
-    padding: 2rem 0;
+    /* padding: 2rem 0; */
   }
 
   @media (max-width: 480px) {
-    padding: 1rem 0;
+    /* padding: 1rem 0; */
   }
 `;
 
 const HeroSection = styled.section`
   text-align: center;
-  margin-bottom: 5rem;
-  padding: 3rem 2rem;
-  max-width: 1500px;
+
+  padding: 5rem 5rem;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
-
+  background-color: #2c7a8c;
   @media (max-width: 1200px) {
-    padding: 2.5rem 2rem;
+    padding: 4rem 2rem;
     /* margin-bottom: 4rem; */
   }
 
   @media (max-width: 768px) {
-    padding: 2rem 1rem;
+    padding: 4rem 2rem;
     /* margin-bottom: 3rem; */
   }
 
   @media (max-width: 480px) {
-    padding: 1.5rem 0.5rem;
+    padding: 4rem 2rem;
     /* margin-bottom: 2rem; */
   }
 `;
@@ -179,6 +179,7 @@ const ContentSection = styled.div`
 
   @media (max-width: 1200px) {
     padding: 3rem;
+    border-bottom: 1px solid #2c7a8c;
   }
 
   @media (max-width: 768px) {
